@@ -16,7 +16,7 @@ app.set('view engine', 'ejs')
 app.get('/',function(req,res){
     res.render('index')
 });
-app.get('/second',function(req,res){
+app.get('/second/:username',function(req,res){  // i made this route dynamic
     res.render('secod')
 })
 
