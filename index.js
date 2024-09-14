@@ -46,10 +46,25 @@ app.post('/create', function(req,res){
     })
 })
 
-app.get('/secod/:username', function(req, res) {  
-    // Dynamic route example
-    res.render('secod', { username: req.params.username });
+app.get('/filess/:filename', function(req, res) {
+
+    fs.readFile(`./filess/${req.params.filename}`, 'utf-8' ,function(value){
+//res.render('show')
+// console.log(res.json());
+
+    })
+    // fs.readFile(`./files` function(err, filess) {
+    //     if (err) {
+    //         console.error("Error reading directory:", err);
+    //         return res.status(500).send("Error reading files.");
+    //     }
+    //     res.render('index', { files: filess });
+   // });
 });
+// app.get('/secod/:username', function(req, res) {  
+//     // Dynamic route example
+//     res.render('secod', { username: req.params.username });
+// });
 
 app.listen(3000, function() {
     console.log("Server is running on port 3000");
