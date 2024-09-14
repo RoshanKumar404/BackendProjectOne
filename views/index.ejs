@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <link rel="stylesheet" href="/stylesheet/style.css"> -->
+    <title>Task Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-    <div class="main w-full min-h-screen bg-zinc-700 ">
+    <div class="main w-full min-h-screen bg-zinc-700">
         <div class="form p-13 text-white">
             <form action="">
-                <input    class="block w-full rounded-md outline-none px-6 py-2 bg-zinc-600"  type="text" placeholder="Title goes here" >
-                <textarea class="block w-full rounded-md outline-none resize-none px-6 py-2 mt-5 bg-zinc-600 " placeholder="Descript your task plz"></textarea>
-                 <input class="px-4 py-2 mt-5 bg-blue-600" value="create your task">
+                <input class="block w-full rounded-md outline-none px-6 py-2 bg-zinc-600" type="text"
+                    placeholder="Title goes here">
+                <textarea class="block w-full rounded-md outline-none resize-none px-6 py-2 mt-5 bg-zinc-600"
+                    placeholder="Describe your task"></textarea>
+                <input type="submit" class="px-4 py-2 mt-5 bg-blue-600" value="Create your task">
             </form>
         </div>
+
+        <% if (files && files.length > 0) { %>
         <div class="tasks p-10 flex gap-3 flex-wrap">
-            <div class="task hidden w-72 px-3 py-4 rounded-md bg-zinc-600">
-                <h1 class="text-white text-3xl tracking-tighter">Some Text goes here</h1>
-                <a class="text-blue-500 inline-block mt-3" href="">Read more</a>
+            <% files.forEach(function(file) { %>
+            <div class="task w-72 px-3 py-4 rounded-md bg-zinc-600">
+                <h1 class="text-white text-3xl tracking-tighter"><%= file %></h1>
+                <a class="text-blue-500 inline-block mt-3" href="/filess/<%= file %>">Read more</a>
             </div>
-            <div class="task  hidden px-3 py-4 rounded-md bg-zinc-600">
-                <h1 class="text-white text-3xl tracking-tighter">Some Text goes here</h1>
-                <a class="text-blue-500 inline-block mt-3" href="">Read more</a>
-            </div>
-            <div class="task hidden w-72 px-3 py-4 rounded-md bg-zinc-600">
-                <h1 class="text-white text-3xl tracking-tighter">Some Text goes here</h1>
-                <a class="text-blue-500 inline-block mt-3" href="">Read more</a>
-            </div>
-            <div class="task hidden w-72 px-3 py-4 rounded-md bg-zinc-600">
-                <h1 class="text-white text-3xl tracking-tighter">Some Text goes here</h1>
-                <a class="text-blue-500 inline-block mt-3" href="">Read more</a>
-            </div>
-            <h3 class="text-zinc-500">no tasks yet...</h3>
+            
+            <% }) %>
         </div>
+        <% } else { %>
+        <h3 class="text-zinc-500">No tasks created yet</h3>
+        <% } %>
+
     </div>
-     <h1>hey buddy how are you</h1>
-   <!-- <script  src="/javascripts/script.js"> </script> -->
+    <script>
+        console.log('Task manager page loaded');
+    </script>
 </body>
+
 </html>

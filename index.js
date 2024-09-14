@@ -1,35 +1,36 @@
-const { render } = require('ejs');
-const express= require('express');
-const app= express();
-const path= require('path')
-const fs=require('fs');
+const express = require('express');
+const app = express();
+const path = require('path');
+const fs = require('fs');
 const { log } = require('console');
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname ,'public')))
-// app.use(function(req,res,next ,){
 
-//     console.log('ku6 to hua par pata nahi');
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'ejs');
+
+// Middleware example
+// app.use(function(req, res, next){
+//     console.log('Middleware triggered');
 //     next();
-// })
-app.set('view engine', 'ejs')
+// });
 
-app.get('/',function(req,res){
-    fs.readdir('./files',function(err,files){
-console.log(files);
-
-    })
-    res.render('index')
+app.get('/', function(req, res) {
+    fs.readdir('./filess', function(err, filess) {
+        if (err) {
+            console.error("Error reading directory:", err);
+            return res.status(500).send("Error reading files.");
+        }
+        res.render('index', { files: filess });
+    });
 });
-app.get('/second/:username',function(req,res){  // i made this route dynamic
-    res.render('secod')
-})
 
-app.listen(3000 ,function(){
-    console.log("its working");
-    
-})
+app.get('/secod/:username', function(req, res) {  
+    // Dynamic route example
+    res.render('secod', { username: req.params.username });
+});
 
-
-// const path=require('path');
-// console.log(path.join(__dirname +'/public'));
+app.listen(3000, function() {
+    console.log("Server is running on port 3000");
+});
