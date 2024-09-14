@@ -25,6 +25,26 @@ app.get('/', function(req, res) {
         res.render('index', { files: filess });
     });
 });
+app.post('/create', function(req,res){
+    const filename=req.body.title.split(' ').map(function(val){
+        return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+    }).join('');
+
+    const filepath=`./filess/${filename}.tsx `;
+    const filDescription= req.body.Description || 'Default file Description'
+
+    fs.writeFile(filepath,filDescription, (err)=>{
+        if(err){
+            console.log('error while writing the file');
+            return res.status(500).send('error creaaating file');
+
+            
+        }
+        console.log('file created successfully : ', filepath);
+        res.redirect('/')
+        
+    })
+})
 
 app.get('/secod/:username', function(req, res) {  
     // Dynamic route example
