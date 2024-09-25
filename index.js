@@ -44,13 +44,21 @@ app.post('/create', function(req,res){
         res.redirect('/')
         
     })
+   
 })
 
 app.get('/filess/:filename', function(req, res) {
 
-    fs.readFile(`./filess/${req.params.filename}`, 'utf-8' ,function(value){
-//res.render('show')
+    fs.readFile(`./filess/${req.params.filename}`, 'utf-8' ,function(value,filedata){
+res.render('show',{filename:req.params.filename ,filedata:filedata})
 // console.log(res.json());
+// readFile(filepath, 'utf-8', function(err, content) {
+//     if (err) {
+//         console.error('Error reading file:', err);
+//         return res.status(500).send('Error reading file');
+//     }
+//     res.render('show', { filename: req.params.filename, content });
+// });
 
     })
     // fs.readFile(`./files` function(err, filess) {
@@ -65,6 +73,33 @@ app.get('/filess/:filename', function(req, res) {
 //     // Dynamic route example
 //     res.render('secod', { username: req.params.username });
 // });
+
+// app.get('/edit/:filename', function(req,res){
+
+//     const newfilename=req.body.title.split(' ').map(function(val){
+//         return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+//     }).join('');
+
+//     const oldfilepath=`./filess/${req.params.filename}.tsx`;
+//     const newFilePath=`./filess/${newfilename}.tsx`
+
+//     fs.rename(oldfilepath,newFilePath, (err)=>{
+//         console.log('file renamed',newFilePath);
+
+//         res.redirect('/')
+        
+//     })
+     
+    // res.send('shyad ho gya hai')
+    // const newfilename=req.body.title.split(' ').map(function(val){
+    //     return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+    // }).join('');
+    // fs.rename(filename,newfilename,(err)=>{
+    //     if(err) throw err;
+    //     console.log('shayd tum sahi ho');
+        
+    // })
+//})
 
 app.listen(3000, function() {
     console.log("Server is running on port 3000");
