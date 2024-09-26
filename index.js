@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const { log } = require('console');
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,10 +31,12 @@ app.post('/create', function(req,res){
         return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
     }).join('');
 
-    const filepath=`./filess/${filename}.tsx `;
+    const filepath=`./filess/${filename}.tsx`;
     const filDescription= req.body.Description || 'Default file Description'
 
     fs.writeFile(filepath,filDescription, (err)=>{
+        console.log(filDescription);
+        
         if(err){
             console.log('error while writing the file');
             return res.status(500).send('error creaaating file');
@@ -49,8 +52,12 @@ app.post('/create', function(req,res){
 
 app.get('/filess/:filename', function(req, res) {
 
-    fs.readFile(`./filess/${req.params.filename}`, 'utf-8' ,function(value,filedata){
-res.render('show',{filename:req.params.filename ,filedata:filedata})
+    fs.readFile(`./filess/${req.params.filename}`, 'utf-8' ,function(err,fildata){
+      
+        console.log(`${fildata} and ${req.params.filename}`);
+
+        
+res.render('show',{filename:req.params.filename ,filedata:fildata})
 // console.log(res.json());
 // readFile(filepath, 'utf-8', function(err, content) {
 //     if (err) {
