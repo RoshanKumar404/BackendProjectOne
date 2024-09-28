@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const fs = require('fs');
+const fs = require('node:fs');
 const { log } = require('console');
 
 
@@ -52,12 +52,17 @@ app.post('/create', function(req,res){
 
 app.get('/filess/:filename', function(req, res) {
 
-    fs.readFile(`./filess/${req.params.filename}`, 'utf-8' ,function(err,fildata){
+    fs.readFile(`/home/roshan/Desktop/BackendProjectOne/filess/${req.params.filename}`, 'utf-8' ,function(err,data){
       
-        console.log(`${fildata} and ${req.params.filename}`);
+        //console.log(`${data} and ${req.params.filename}`);
 
-        
-res.render('show',{filename:req.params.filename ,filedata:fildata})
+        // if (err) {
+        //     console.error(`Error reading file: ${err}`);
+        //     return res.status(404).send('File not found');
+        // }
+        // console.log(`${data} and ${req.params.filename}`);
+        // res.send(`${req.params.filename} ${data}`);
+res.render('show',{filename:req.params.filename ,data:data})
 // console.log(res.json());
 // readFile(filepath, 'utf-8', function(err, content) {
 //     if (err) {
@@ -81,22 +86,23 @@ res.render('show',{filename:req.params.filename ,filedata:fildata})
 //     res.render('secod', { username: req.params.username });
 // });
 
-// app.get('/edit/:filename', function(req,res){
+app.get('/edit/:filename', function(req,res){
 
-//     const newfilename=req.body.title.split(' ').map(function(val){
-//         return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
-//     }).join('');
+    const newfilename=req.body.title.split(' ').map(function(val){
+        return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
+    }).join('');
 
-//     const oldfilepath=`./filess/${req.params.filename}.tsx`;
-//     const newFilePath=`./filess/${newfilename}.tsx`
+    const oldfilepath=`./filess/${req.params.filename}.tsx`;
+    const newFilePath=`./filess/${newfilename}.tsx`
 
-//     fs.rename(oldfilepath,newFilePath, (err)=>{
-//         console.log('file renamed',newFilePath);
+    fs.rename(oldfilepath,newFilePath, (err)=>{
+        console.log('file renamed',newFilePath);
 
-//         res.redirect('/')
+        res.redirect('/')
         
-//     })
+    })
      
+})
     // res.send('shyad ho gya hai')
     // const newfilename=req.body.title.split(' ').map(function(val){
     //     return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();

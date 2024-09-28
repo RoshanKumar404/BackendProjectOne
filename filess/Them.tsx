@@ -1,1 +1,0 @@
-them is very bad
