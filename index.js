@@ -87,23 +87,11 @@ res.render('show',{filename:req.params.filename ,data:data})
 // });
 
 app.get('/edit/:filename', function(req,res){
-
-    const newfilename=req.body.title.split(' ').map(function(val){
-        return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
-    }).join('');
-
-    const oldfilepath=`./filess/${req.params.filename}.tsx`;
-    const newFilePath=`./filess/${newfilename}.tsx`
-
-    fs.rename(oldfilepath,newFilePath, (err)=>{
-        console.log('file renamed',newFilePath);
-
-        res.redirect('/')
-        
-    })
+res.render('edit' , {filename:req.params.filename})
      
-})
-    // res.send('shyad ho gya hai')
+});
+
+   // res.send('shyad ho gya hai')
     // const newfilename=req.body.title.split(' ').map(function(val){
     //     return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
     // }).join('');

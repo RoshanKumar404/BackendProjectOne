@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white flex justify-center items-center h-screen">
+    <div class="w-full max-w-md text-center">
+        <h1 class="text-2xl font-semibold mb-6">You will be able to change the name of your file and the content</h1>
+        <div class="form p-12 bg-zinc-800 rounded-lg shadow-lg">
+            <form action="/edit" method="post">
+                <input class="block w-full rounded-md outline-none px-6 py-2 bg-zinc-600 mb-4" type="text" name="previous_name"
+                    placeholder="Previous Name" value="<%=filename%>">
+                <textarea class="block w-full rounded-md outline-none resize-none px-6 py-2 mb-4 bg-zinc-600" name="new_name"
+                    placeholder="New Name"></textarea>
+                <input type="submit" class="px-4 py-2 w-full bg-blue-600 hover:bg-blue-700 rounded-md" value="Save New Name">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
